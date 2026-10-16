@@ -144,9 +144,10 @@ const HeroSection = ({ isWelcomeActive = false }) => {
             <div className="relative w-60 h-60 sm:w-72 sm:h-72 rounded-full p-1 bg-gradient-to-tr from-amber-400 via-rose-500 to-indigo-500 shadow-2xl">
               <div className="w-full h-full rounded-full overflow-hidden bg-card border-4 border-card">
                 <img
-                  src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80"
+                  src="https://res.cloudinary.com/djtqud6z0/image/upload/v1792051782/image_w0uhza.jpg"
                   alt="Nguyen Duy Hanh Avatar"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover object-top"
+                  style={{ objectPosition: "center 10%" }}
                 />
               </div>
             </div>
