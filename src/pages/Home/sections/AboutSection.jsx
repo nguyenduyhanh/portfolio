@@ -60,9 +60,10 @@ const AboutSection = () => {
           <ScrollReveal className="w-full lg:w-5/12 flex justify-center">
             <div className="relative w-full max-w-md aspect-[4/5] rounded-3xl overflow-hidden shadow-xl border border-border">
               <img
-                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80"
+                src="https://res.cloudinary.com/djtqud6z0/image/upload/v1792051782/image_w0uhza.jpg"
                 alt="Nguyen Duy Hanh Photo"
                 className="w-full h-full object-cover"
+                style={{ objectPosition: "center 15%" }}
               />
             </div>
           </ScrollReveal>
