@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 
 import HomePage from "./pages/Home/index.jsx";
 import ProjectDetailPage from "./pages/ProjectDetail.jsx";
+import ResumePage from "./pages/Resume/index.jsx";
 import Welcome from "./pages/Welcome.jsx";
 
 function ScrollToTop() {
@@ -27,6 +28,8 @@ function App() {
       )}
       <Routes>
         <Route path="/" element={<HomePage isWelcomeActive={showWelcome} />} />
+        <Route path="/resume" element={<ResumePage />} />
+        <Route path="/cv" element={<ResumePage />} />
         <Route path="/projects/:id" element={<ProjectDetailPage />} />
         <Route path="/project/:id" element={<ProjectDetailPage />} />
         <Route path="*" element={<HomePage isWelcomeActive={showWelcome} />} />

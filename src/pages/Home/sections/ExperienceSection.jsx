@@ -5,34 +5,32 @@ import { ScrollReveal, activePillTransition, smoothEase } from "../../../animati
 
 const workExperience = [
   {
-    role: "Freelance Fullstack Developer",
-    organization: "Self-Employed",
-    period: "2024 - Present",
-    location: "Remote / Vietnam",
-    description:
-      "Design and develop custom web applications using React, Next.js, Node.js, and MongoDB. Implement responsive UI/UX and integrate RESTful APIs for client projects.",
-    technologies: ["React", "Next.js", "Node.js", "Express", "MongoDB", "Tailwind CSS"],
-  },
-  {
-    role: "Backend & Web Developer",
-    organization: "Academic Projects & Open Source",
-    period: "2023 - 2024",
-    location: "Ha Noi",
-    description:
-      "Built IoT smart parking server using ESP32, React, and Node.js with real-time WebSocket communication and database design.",
-    technologies: ["Node.js", "Express.js", "MongoDB", "Socket.io", "C++"],
+    role: "Fullstack Developer",
+    organization: "Globits Co., Ltd.",
+    period: "10/2025 - 09/2026",
+    location: "Ha Noi, Vietnam",
+    description: [
+      "Developed and maintained web applications based on business requirements.",
+      "Designed and integrated RESTful APIs to connect frontend and backend systems.",
+      "Worked with databases to manage data, write queries, and optimize data processing.",
+      "Troubleshot technical issues, debugged code, and improved application performance.",
+      "Collaborated with team members to implement features, test functionality, and maintain code quality.",
+    ],
+    technologies: ["JavaScript", "React", "Java", "Spring Boot", "RESTful API", "SQL / Database", "GitLab"],
   },
 ];
 
 const educationData = [
   {
-    role: "Information Technology Degree",
-    organization: "University of Transport in Ho Chi Minh City",
-    period: "2022 - Present",
+    role: "Information Technology",
+    organization: "Thuy Loi University",
+    period: "2022 - 2026",
     location: "Ha Noi, Vietnam",
-    description:
-      "Majoring in Software Engineering and Information Technology. Focus on Data Structures, Algorithms, Web Architecture, and Database Systems.",
-    technologies: ["Java", "C/C++", "Data Structures", "Algorithms", "Database Design"],
+    description: [
+      "Major: Information Technology",
+      "Member of the Student Informatics Club, supporting programming classes and technical assistance for electronic devices.",
+    ],
+    technologies: ["Data Structures & Algorithms", "Database Systems", "Software Engineering", "Web Development", "OOP"],
   },
 ];
 
@@ -115,7 +113,9 @@ const ExperienceSection = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className="grid grid-cols-1 md:grid-cols-2 gap-8"
+            className={`grid grid-cols-1 ${
+              items.length > 1 ? "md:grid-cols-2" : "max-w-3xl mx-auto"
+            } gap-8`}
           >
             {items.map((item, index) => (
               <motion.div
@@ -142,33 +142,48 @@ const ExperienceSection = () => {
                       <Calendar className="w-3.5 h-3.5" />
                       <span>{item.period}</span>
                     </div>
-                    <div className="flex items-center gap-1">
-                      <MapPin className="w-3.5 h-3.5" />
-                      <span>{item.location}</span>
-                    </div>
+                    {item.location && (
+                      <div className="flex items-center gap-1">
+                        <MapPin className="w-3.5 h-3.5" />
+                        <span>{item.location}</span>
+                      </div>
+                    )}
                   </div>
 
-                  <p className="text-sm text-muted-foreground leading-relaxed mb-6">
-                    {item.description}
-                  </p>
+                  {Array.isArray(item.description) ? (
+                    <ul className="space-y-2.5 mb-6 text-sm text-muted-foreground">
+                      {item.description.map((bullet, bIndex) => (
+                        <li key={bIndex} className="flex items-start gap-2.5 leading-relaxed">
+                          <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2 flex-shrink-0" />
+                          <span>{bullet}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p className="text-sm text-muted-foreground leading-relaxed mb-6">
+                      {item.description}
+                    </p>
+                  )}
                 </div>
 
                 {/* Technologies Badges */}
-                <div>
-                  <span className="block text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">
-                    Technologies / Skills:
-                  </span>
-                  <div className="flex flex-wrap gap-2">
-                    {item.technologies.map((tech, tIndex) => (
-                      <span
-                        key={tIndex}
-                        className="px-3 py-1 rounded-full text-xs font-medium bg-muted text-foreground border border-border"
-                      >
-                        {tech}
-                      </span>
-                    ))}
+                {item.technologies && item.technologies.length > 0 && (
+                  <div>
+                    <span className="block text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">
+                      Technologies / Skills:
+                    </span>
+                    <div className="flex flex-wrap gap-2">
+                      {item.technologies.map((tech, tIndex) => (
+                        <span
+                          key={tIndex}
+                          className="px-3 py-1 rounded-full text-xs font-medium bg-muted text-foreground border border-border"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                </div>
+                )}
               </motion.div>
             ))}
           </motion.div>
