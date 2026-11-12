@@ -10,22 +10,42 @@ import {
   SiGit,
   SiDocker,
   SiVite,
+  SiSpringboot,
+  SiGooglegemini,
+  SiClaude,
 } from "react-icons/si";
-import { TbApi, TbBrandReactNative } from "react-icons/tb";
+import { FaJava } from "react-icons/fa";
+import { PiOpenAiLogo } from "react-icons/pi";
+import { VscVscode } from "react-icons/vsc";
+import { TbApi } from "react-icons/tb";
+import { AntigravityIcon } from "../../../components/icons/AntigravityIcon";
 import { motion, AnimatePresence } from "framer-motion";
 import { ScrollReveal, activePillTransition, smoothEase } from "../../../animations";
 
 const skillsData = [
+  // Frontend
   { name: "React.js / Next.js", category: "frontend", icon: SiReact, color: "#61DAFB" },
   { name: "JavaScript / ES6+", category: "frontend", icon: SiJavascript, color: "#F7DF1E" },
   { name: "Tailwind CSS & CSS3", category: "frontend", icon: SiTailwindcss, color: "#06B6D4" },
   { name: "HTML5 & Semantic UI", category: "frontend", icon: SiHtml5, color: "#E34F26" },
+
+  // Backend
+  { name: "Java & Core Concepts", category: "backend", icon: FaJava, color: "#EA2D2E" },
+  { name: "Spring Boot & Security", category: "backend", icon: SiSpringboot, color: "#6DB33F" },
   { name: "Node.js & Express.js", category: "backend", icon: SiNodedotjs, color: "#5FA04E" },
-  { name: "MongoDB & Mongoose", category: "backend", icon: SiMongodb, color: "#47A248" },
   { name: "MySQL & Relational DB", category: "backend", icon: SiMysql, color: "#4479A1" },
+  { name: "MongoDB & Mongoose", category: "backend", icon: SiMongodb, color: "#47A248" },
   { name: "RESTful API & WebSocket", category: "backend", icon: TbApi, color: "#009688" },
-  { name: "React Native", category: "mobile", icon: TbBrandReactNative, color: "#61DAFB" },
-  { name: "Git / GitHub / CI/CD", category: "tools", icon: SiGit, color: "#F05032" },
+
+  // AI & Agents
+  { name: "ChatGPT / OpenAI", category: "ai", icon: PiOpenAiLogo, color: "currentColor" },
+  { name: "Google Gemini", category: "ai", icon: SiGooglegemini, color: "#4E89FF" },
+  { name: "Claude & Claude Code", category: "ai", icon: SiClaude, color: "#D97757" },
+  { name: "Antigravity AI Agent", category: "ai", icon: AntigravityIcon, color: "#4E89FF" },
+  { name: "VS Code & AI Extensions", category: "ai", icon: VscVscode, color: "#007ACC" },
+
+  // Dev Tools
+  { name: "Git / GitHub / GitLab", category: "tools", icon: SiGit, color: "#F05032" },
   { name: "Docker & VPS Deploy", category: "tools", icon: SiDocker, color: "#2496ED" },
   { name: "Vite / Webpack", category: "tools", icon: SiVite, color: "#646CFF" },
 ];
@@ -34,7 +54,7 @@ const categories = [
   { id: "all", label: "All Skills" },
   { id: "frontend", label: "Frontend" },
   { id: "backend", label: "Backend" },
-  { id: "mobile", label: "Mobile" },
+  { id: "ai", label: "AI & Agents" },
   { id: "tools", label: "Dev Tools" },
 ];
 

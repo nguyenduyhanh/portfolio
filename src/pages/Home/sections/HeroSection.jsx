@@ -1,14 +1,13 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { ArrowRight, MapPin, Sparkles, Code2, Bot, Brain, Cpu, Wand2 } from "lucide-react";
+import { AntigravityIcon } from "../../../components/icons/AntigravityIcon";
 import { motion } from "framer-motion";
 import { fadeInUp, staggerContainer, buttonHoverProps } from "../../../animations";
 
 const roles = [
   "Fullstack Developer",
-  "Frontend Engineer",
-  "AI-Assisted Dev Specialist",
-  "Software Engineer",
+  "AI-Assisted Developer",
 ];
 
 const HeroSection = ({ isWelcomeActive = false }) => {
@@ -168,7 +167,7 @@ const HeroSection = ({ isWelcomeActive = false }) => {
               transition={{ repeat: Infinity, duration: 3.5, ease: "easeInOut", delay: 1 }}
               className="absolute -bottom-2 -left-4 px-3.5 py-1.5 rounded-full bg-card border border-border text-foreground text-xs font-bold shadow-lg flex items-center gap-1.5"
             >
-              <Bot className="w-3.5 h-3.5 text-purple-500 dark:text-purple-400" />
+              <AntigravityIcon className="w-3.5 h-3.5" />
               <span>AI-Assisted Dev</span>
             </motion.div>
           </motion.div>

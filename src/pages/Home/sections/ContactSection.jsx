@@ -1,10 +1,21 @@
 import { useState } from "react";
-import { Send, CheckCircle2 } from "lucide-react";
+import { CheckCircle2, ExternalLink, Mail } from "lucide-react";
 import { motion } from "framer-motion";
 import { FaGithub, FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa6";
+import { SiGmail } from "react-icons/si";
 import { ScrollReveal, StaggerContainer, StaggerItem, buttonHoverProps } from "../../../animations";
 
+const RECIPIENT_EMAIL = "hanh27052004@gmail.com";
+
 const socialLinks = [
+  {
+    name: "Gmail",
+    handle: "hanh27052004@gmail.com",
+    url: `https://mail.google.com/mail/?view=cm&fs=1&to=${RECIPIENT_EMAIL}`,
+    icon: SiGmail,
+    color: "text-[#EA4335]",
+    hoverBorder: "hover:border-[#EA4335]",
+  },
   {
     name: "GitHub",
     handle: "@NguyenDuyHanh",
@@ -42,15 +53,43 @@ const socialLinks = [
 const ContactSection = () => {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
+  const [openedUrl, setOpenedUrl] = useState("");
+
+  const buildGmailUrl = () => {
+    const subject = `[Portfolio Contact] Tin nhắn từ ${formData.name || "Khách truy cập"}`;
+    const bodyLines = [
+      "Xin chào Hạnh,",
+      "",
+      formData.message || "(Viết lời nhắn của bạn ở đây...)",
+      "",
+      "-------------------------",
+      "Thông tin người gửi:",
+      `- Họ và tên: ${formData.name || "Chưa cung cấp"}`,
+      `- Email liên hệ: ${formData.email || "Chưa cung cấp"}`,
+    ];
+    const body = bodyLines.join("\n");
+
+    return `https://mail.google.com/mail/?view=cm&fs=1&to=${RECIPIENT_EMAIL}&su=${encodeURIComponent(
+      subject
+    )}&body=${encodeURIComponent(body)}`;
+  };
+
+  const buildMailtoUrl = () => {
+    const subject = `[Portfolio Contact] Tin nhắn từ ${formData.name || "Khách truy cập"}`;
+    const body = `Xin chào Hạnh,\n\n${formData.message}\n\n---\nTừ: ${formData.name} (${formData.email})`;
+    return `mailto:${RECIPIENT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!formData.name || !formData.email || !formData.message) return;
+    if (!formData.name.trim() || !formData.message.trim()) return;
+
+    const gmailUrl = buildGmailUrl();
+    setOpenedUrl(gmailUrl);
+
+    // Mở trực tiếp tab soạn thư của Gmail
+    window.open(gmailUrl, "_blank");
     setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      setFormData({ name: "", email: "", message: "" });
-    }, 4000);
   };
 
   return (
@@ -105,21 +144,58 @@ const ContactSection = () => {
             </StaggerContainer>
           </ScrollReveal>
 
-          {/* Right Column: Send a Message Form */}
+          {/* Right Column: Send a Message via Gmail */}
           <ScrollReveal delay={0.15} className="p-8 rounded-3xl border border-border bg-card text-card-foreground shadow-sm">
-            <h3 className="text-xl font-bold text-foreground mb-6">
-              Send a Message
-            </h3>
+            <div className="flex items-center justify-between gap-3 mb-6">
+              <div>
+                <h3 className="text-xl font-bold text-foreground">
+                  Send a Message
+                </h3>
+                <p className="text-xs text-muted-foreground mt-0.5">
+                  Điền thông tin và chuyển thẳng sang trang soạn thư Gmail
+                </p>
+              </div>
+              <div className="p-2.5 rounded-xl bg-red-500/10 border border-red-500/20 text-[#EA4335] shrink-0" title="Chuyển sang Gmail">
+                <SiGmail className="w-5 h-5" />
+              </div>
+            </div>
 
             {submitted ? (
-              <div className="py-12 flex flex-col items-center justify-center text-center">
-                <CheckCircle2 className="w-12 h-12 text-emerald-500 mb-3 animate-bounce" />
+              <div className="py-10 flex flex-col items-center justify-center text-center">
+                <div className="w-16 h-16 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 flex items-center justify-center mb-4">
+                  <CheckCircle2 className="w-8 h-8" />
+                </div>
                 <h4 className="text-lg font-bold text-foreground">
-                  Message Sent Successfully!
+                  Đã mở trang soạn thư Gmail!
                 </h4>
-                <p className="text-sm text-muted-foreground mt-1">
-                  Thank you for reaching out. I will get back to you soon!
+                <p className="text-sm text-muted-foreground mt-2 max-w-sm">
+                  Tab soạn thư của Gmail đã được mở với đầy đủ nội dung bạn vừa nhập. Hãy bấm nút <span className="font-semibold text-foreground">"Gửi"</span> trên Gmail để hoàn tất nhé!
                 </p>
+
+                <div className="mt-6 flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto">
+                  {openedUrl && (
+                    <a
+                      href={openedUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl bg-primary text-primary-foreground text-xs font-semibold hover:opacity-90 transition-opacity cursor-pointer shadow-xs"
+                    >
+                      <ExternalLink className="w-3.5 h-3.5" />
+                      <span>Mở lại tab Gmail</span>
+                    </a>
+                  )}
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSubmitted(false);
+                      setFormData({ name: "", email: "", message: "" });
+                    }}
+                    className="w-full sm:w-auto px-4 py-2 rounded-xl border border-border bg-muted/60 text-foreground text-xs font-semibold hover:bg-muted transition-colors cursor-pointer"
+                  >
+                    Soạn tin nhắn mới
+                  </button>
+                </div>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="flex flex-col gap-5">
@@ -139,11 +215,10 @@ const ContactSection = () => {
 
                 <div>
                   <label className="block text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">
-                    Email Address *
+                    Email Address (Optional)
                   </label>
                   <input
                     type="email"
-                    required
                     placeholder="john@example.com"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -165,14 +240,29 @@ const ContactSection = () => {
                   />
                 </div>
 
-                <motion.button
-                  {...buttonHoverProps}
-                  type="submit"
-                  className="w-full mt-2 inline-flex items-center justify-center gap-2 py-3.5 rounded-xl bg-primary text-primary-foreground font-semibold text-sm hover:opacity-90 transition-all shadow-md cursor-pointer"
-                >
-                  <Send className="w-4 h-4" />
-                  <span>Send Message</span>
-                </motion.button>
+                <div className="pt-1 flex flex-col gap-2.5">
+                  <motion.button
+                    {...buttonHoverProps}
+                    type="submit"
+                    className="w-full inline-flex items-center justify-center gap-2.5 py-3.5 rounded-xl bg-primary text-primary-foreground font-semibold text-sm hover:opacity-90 transition-all shadow-md cursor-pointer"
+                  >
+                    <SiGmail className="w-4 h-4 text-[#EA4335]" />
+                    <span>Mở & Gửi qua Gmail</span>
+                    <ExternalLink className="w-3.5 h-3.5 opacity-80" />
+                  </motion.button>
+
+                  <div className="flex items-center justify-between text-[11px] text-muted-foreground px-1">
+                    <span>Tự động điền tiêu đề & nội dung vào Gmail</span>
+                    <a
+                      href={buildMailtoUrl()}
+                      className="hover:text-foreground inline-flex items-center gap-1 underline transition-colors"
+                      title="Mở ứng dụng email mặc định trên thiết bị"
+                    >
+                      <Mail className="w-3 h-3" />
+                      <span>Hoặc mở app Mail</span>
+                    </a>
+                  </div>
+                </div>
               </form>
             )}
           </ScrollReveal>

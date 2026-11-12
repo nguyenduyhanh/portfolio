@@ -1,5 +1,6 @@
+import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { User, MapPin, Mail, GraduationCap, Phone, Briefcase, Download, Send } from "lucide-react";
+import { User, MapPin, Mail, GraduationCap, Phone, Briefcase, FileText, Send } from "lucide-react";
 import { motion } from "framer-motion";
 import { ScrollReveal, StaggerContainer, StaggerItem, buttonHoverProps } from "../../../animations";
 
@@ -22,7 +23,7 @@ const infoCards = [
   {
     icon: GraduationCap,
     label: "Education",
-    value: "Information Technology Student",
+    value: "Thuy Loi University",
   },
   {
     icon: Phone,
@@ -32,7 +33,7 @@ const infoCards = [
   {
     icon: Briefcase,
     label: "Profession",
-    value: "Software Engineer",
+    value: "Fullstack Developer",
   },
 ];
 
@@ -104,14 +105,15 @@ const AboutSection = () => {
 
             {/* Action Buttons */}
             <div className="flex flex-wrap items-center gap-4">
-              <motion.a
-                {...buttonHoverProps}
-                href="/resume"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-semibold text-sm hover:opacity-90 transition-all shadow-md cursor-pointer"
-              >
-                <Download className="w-4 h-4" />
-                <span>Download My CV</span>
-              </motion.a>
+              <motion.div {...buttonHoverProps}>
+                <Link
+                  to="/resume"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-semibold text-sm hover:opacity-90 transition-all shadow-md cursor-pointer"
+                >
+                  <FileText className="w-4 h-4" />
+                  <span>My CV</span>
+                </Link>
+              </motion.div>
 
               <motion.button
                 {...buttonHoverProps}

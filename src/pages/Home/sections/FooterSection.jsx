@@ -73,9 +73,9 @@ const FooterSection = () => {
             </h4>
             <ul className="flex flex-col gap-2.5 text-sm text-muted-foreground">
               <li>Web Development</li>
-              <li>Mobile App Development</li>
+              <li>Backend & API Development</li>
               <li>UI/UX Design</li>
-              <li>API Development</li>
+              <li>AI-Assisted Solutions</li>
               <li>System Architecture</li>
               <li>IT Consulting</li>
             </ul>

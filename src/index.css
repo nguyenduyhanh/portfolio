@@ -140,3 +140,17 @@
   animation: handWave 1.6s ease-in-out infinite;
   transform-origin: 70% 70%;
 }
+
+/* Print optimization for CV / Resume */
+@media print {
+  @page {
+    margin: 12mm;
+    size: A4 portrait;
+  }
+  body {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+}
